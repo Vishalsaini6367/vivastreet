@@ -1,0 +1,23 @@
+.homepage-banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fdecd9;
+    padding: 1rem;
+}
+
+.homepage-banner svg {
+    width: 1.5rem;
+}
+
+.homepage-banner p {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0;
+}
+
+.homepage-banner a {
+    text-decoration: underline;
+}

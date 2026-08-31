@@ -1,0 +1,29 @@
+.static_home__background_image {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+
+.static_home__background_image.country_chile {
+	background-image: url(https://latam.viva-images.com/vivastreet_cl/home/images/hp_cl_bg.jpg);
+}
+
+.static_home__background_image.country_india {
+	background-image: url(https://row.viva-images.com/vivastreet_in/hp_in_bg3.png);
+}
+
+.static_home__background_image.country_brazil {
+	background-image: url(https://latam.viva-images.com/global/HPheroBR.jpg);
+}
+
+.static_home__background_image.country_ireland {
+	background-image: url(https://eu.viva-images.com/vivastreet_ie/hp_ie_bg.png);
+}
+
+.static_home__background_image.country_belgium {
+	background-image: url(https://eu.viva-images.com/vivastreet_be/behp2.jpg);
+}
+
+.static_home__background_image.country_portugal {
+	background-image: url(https://eu.viva-images.com/vivastreet_pt/static_assets/home_page/pt_hero_1.jpg);
+}

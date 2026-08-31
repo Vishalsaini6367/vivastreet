@@ -1,0 +1,68 @@
+.grey {
+	color: #dce0e0;
+}
+
+.bluegrey {
+	color: #aab5b7;
+}
+
+.dkbluegrey {
+	color: #828e9a;
+}
+
+.ltgrey {
+	color: #999;
+}
+
+.mdgrey {
+	color: #666;
+}
+
+.dkgrey {
+	color: #333;
+}
+
+.green {
+	color: #65b21c;
+}
+
+.ltgreen {
+	color: #6fce72;
+}
+
+.dkgreen {
+	color: #323a45;
+}
+
+.orange {
+	color: #ff7f04;
+}
+
+.ltorange {
+	color: #f36a2e;
+}
+
+.red {
+	color: #e4655f;
+}
+
+.blue {
+	color: #2990bf;
+}
+
+.maincolor {
+	color: #f5f4e9;
+}
+
+.cta {
+	background-color: #ff7f04;
+}
+
+.btn-orange {
+	background-color: #FE7E22;
+	border: 1px solid #C35F00;
+}
+
+.btn-orange:hover {
+	background: #C35F00;
+}
