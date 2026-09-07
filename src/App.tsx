@@ -208,13 +208,13 @@ function App() {
           />
 
           {/* Post Your Ad CTA Banner */}
-          <section style={{ backgroundColor: '#2b2e36', padding: '0 20px', width: '100%' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, maxWidth: 1056, margin: '0 auto', padding: '20px 0' }}>
-              <h2 style={{ color: '#fff', fontSize: 28, lineHeight: '28px', fontWeight: 400, margin: 0, padding: 0 }}>
+          <section className="main_post_home" style={{ backgroundColor: '#5b6378', padding: '0 20px', width: '100%' }}>
+            <div className="main_post_home_title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, maxWidth: 1000, margin: '0 auto', padding: '24px 0', backgroundColor: 'transparent' }}>
+              <h2 style={{ color: '#fff', fontSize: 26, lineHeight: '28px', fontWeight: 300, margin: 0, padding: 0 }}>
                 Post your ad now !
               </h2>
-              <a href="#" onClick={(e) => { e.preventDefault(); setPage('post-ad'); }}>
-                <div className="btn btn-orange btn-primary" data-automation="homepagePostAdButton" style={{ fontSize: 16, padding: '14px 32px', fontWeight: 600 }}>
+              <a href="#" onClick={(e) => { e.preventDefault(); setPage('post-ad'); }} style={{ textDecoration: 'none' }}>
+                <div className="btn btn-orange btn-primary" data-automation="homepagePostAdButton" style={{ fontSize: 16, padding: '16px 40px', fontWeight: 400, borderRadius: 2, textAlign: 'center', minWidth: 220 }}>
                   Post your Ad
                 </div>
               </a>

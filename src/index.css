@@ -220,14 +220,17 @@ img { max-width: 100%; height: auto; }
   width: 1056px !important;
   max-width: 96vw !important;
   z-index: 5 !important;
+  background-color: rgba(131, 143, 152, 0.9) !important;
+  color: #fff !important;
 }
 .static_home__category__form {
-  background-color: rgba(255,255,255,0.92) !important;
+  background-color: rgba(131, 143, 152, 0.9) !important;
+  color: #fff !important;
 }
 .static_home__search_panel__category__form__title {
-  color: #333 !important;
+  color: #fff !important;
   font-size: 14px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 @media only screen and (max-width: 768px) {
   .static_home__category {
@@ -238,6 +241,7 @@ img { max-width: 100%; height: auto; }
     width: 100% !important;
     max-width: 100% !important;
     padding: 10px 12px !important;
+    background-color: rgba(131, 143, 152, 0.9) !important;
   }
   .static_home__category__form {
     display: flex !important;
@@ -246,6 +250,7 @@ img { max-width: 100%; height: auto; }
     width: 100% !important;
     border-radius: 4px !important;
     overflow: hidden !important;
+    background-color: rgba(131, 143, 152, 0.9) !important;
   }
   .static_home__category__form fieldset {
     display: flex !important;
@@ -276,6 +281,7 @@ img { max-width: 100%; height: auto; }
     font-weight: bold !important;
   }
   .static_home__search_panel__category__form__title {
+    color: #fff !important;
     font-size: 14px !important;
     display: block !important;
     margin-bottom: 4px !important;
@@ -318,23 +324,24 @@ img { max-width: 100%; height: auto; }
 
 /* POST YOUR AD CTA */
 .main_post_home {
-  background-color: #2b2e36 !important;
+  background-color: #5b6378 !important;
   padding: 0 20px !important;
 }
 .main_post_home_title {
+  background-color: transparent !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   flex-wrap: wrap !important;
   gap: 16px !important;
-  max-width: 1056px !important;
+  max-width: 1000px !important;
   margin: 0 auto !important;
-  padding: 20px 0 !important;
+  padding: 24px 0 !important;
 }
 .main_post_home h2 {
   color: #fff !important;
-  font-size: 28px !important;
-  font-weight: 400 !important;
+  font-size: 26px !important;
+  font-weight: 300 !important;
   margin: 0 !important;
   padding: 0 !important;
 }
