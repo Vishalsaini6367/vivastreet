@@ -144,33 +144,79 @@ function App() {
     }
   }, [darkMode]);
 
+  // History-aware Navigation
+  const navigateTo = (
+    newPage: 'home' | 'search' | 'detail' | 'post-ad',
+    listingItem?: Listing | null,
+    pushHistory = true
+  ) => {
+    setPage(newPage);
+    if (listingItem !== undefined) {
+      setSelectedListing(listingItem);
+    }
+    if (pushHistory) {
+      window.history.pushState(
+        { page: newPage, listingId: listingItem?.id || null },
+        '',
+        window.location.pathname
+      );
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      navigateTo('home', null, true);
+    }
+  };
+
+  useEffect(() => {
+    // Initial history state
+    window.history.replaceState({ page: 'home', listingId: null }, '', window.location.pathname);
+
+    const handlePopState = (event: PopStateEvent) => {
+      const state = event.state;
+      if (state && state.page) {
+        setPage(state.page);
+        if (state.listingId) {
+          const found = listings.find((l) => l.id === state.listingId);
+          if (found) setSelectedListing(found);
+        } else {
+          setSelectedListing(null);
+        }
+      } else {
+        setPage('home');
+        setSelectedListing(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [listings]);
+
   const handleHeroSearch = (query: string, category: string, location: string) => {
     setSearchQuery(query);
     setSelectedCategory(category);
     setSelectedLocation(location);
-    setPage('search');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('search');
   };
 
   const handleSelectCategory = (categoryName: string) => {
     setSelectedCategory(categoryName);
     setSearchQuery('');
     setSelectedLocation('');
-    setPage('search');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('search');
   };
 
   const handleSelectListing = (listingItem: Listing) => {
-    setListings(prevListings => 
-      prevListings.map(item => 
-        item.id === listingItem.id 
-          ? { ...item, views: item.views + 1 }
-          : item
+    setListings((prevListings) =>
+      prevListings.map((item) =>
+        item.id === listingItem.id ? { ...item, views: item.views + 1 } : item
       )
     );
-    setSelectedListing({ ...listingItem, views: listingItem.views + 1 });
-    setPage('detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('detail', { ...listingItem, views: listingItem.views + 1 });
   };
 
   const handlePublishAd = (newAd: Listing) => {
@@ -178,9 +224,7 @@ function App() {
   };
 
   const handleViewCreatedAd = (newAd: Listing) => {
-    setSelectedListing(newAd);
-    setPage('detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('detail', newAd);
   };
 
   return (
@@ -191,10 +235,63 @@ function App() {
       {/* Top Banner */}
       <AnnouncementBar />
 
-      {/* Non-Home Page Header */}
+      {/* Non-Home Page Header with Back Button Bar */}
       {page !== 'home' && (
-        <div style={{ backgroundColor: '#2b2e36', padding: '5px 0' }}>
-          <Navbar setPage={setPage} />
+        <div style={{ backgroundColor: '#2b2e36' }}>
+          <div style={{ padding: '5px 0' }}>
+            <Navbar setPage={(p) => navigateTo(p)} />
+          </div>
+          <div
+            style={{
+              backgroundColor: '#383d47',
+              borderTop: '1px solid rgba(255,255,255,0.1)',
+              padding: '8px 16px',
+            }}
+          >
+            <div
+              style={{
+                maxWidth: 1056,
+                margin: '0 auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <button
+                type="button"
+                onClick={handleGoBack}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  cursor: 'pointer',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  padding: '4px 0',
+                }}
+              >
+                <span style={{ fontSize: 18, lineHeight: 1 }}>←</span>
+                <span>Back</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigateTo('home')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#aaa',
+                  cursor: 'pointer',
+                  fontSize: 13,
+                }}
+              >
+                Back to Home
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -204,7 +301,7 @@ function App() {
           <Hero
             onSearchSubmit={handleHeroSearch}
             onSelectCategory={handleSelectCategory}
-            setPage={setPage}
+            setPage={(p) => navigateTo(p)}
           />
 
           {/* Post Your Ad CTA Banner */}
@@ -334,7 +431,7 @@ function App() {
       {page === 'detail' && selectedListing && (
         <ListingDetail
           listing={selectedListing}
-          onBack={() => setPage('search')}
+          onBack={handleGoBack}
         />
       )}
 
@@ -343,7 +440,7 @@ function App() {
           categories={CATEGORIES}
           subcategoriesByCategory={SUBCATEGORIES_BY_CATEGORY}
           onPublish={handlePublishAd}
-          onCancel={() => setPage('home')}
+          onCancel={handleGoBack}
           onViewAd={handleViewCreatedAd}
         />
       )}
