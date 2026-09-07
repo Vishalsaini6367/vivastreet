@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface NavbarProps {
   setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
@@ -122,9 +123,10 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
       </div>
 
       {/* Mobile Slide-Out Sidebar Drawer */}
-      {menuOpen && (
-        <>
-          {/* Backdrop overlay */}
+      {menuOpen &&
+        createPortal(
+          <>
+            {/* Backdrop overlay */}
           <div
             className="vs-mobile-sidebar-backdrop vs-mobile-only"
             onClick={() => setMenuOpen(false)}
@@ -322,7 +324,8 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
               ))}
             </div>
           </aside>
-        </>
+        </>,
+        document.body
       )}
 
       {/* DESKTOP HEADER */}

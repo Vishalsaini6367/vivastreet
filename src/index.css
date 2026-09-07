@@ -14,7 +14,7 @@ img { max-width: 100%; height: auto; }
 /* ANNOUNCEMENT BANNER */
 #banner-homepage.homepage-banner {
   position: relative !important;
-  z-index: 50 !important;
+  z-index: 2 !important;
   width: 100% !important;
   display: flex !important;
   align-items: center !important;
