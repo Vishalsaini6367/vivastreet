@@ -9,30 +9,17 @@
 /* ============================================================
    GLOBAL BASE
    ============================================================ */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
+*, *::before, *::after { box-sizing: border-box; }
 html { font-size: 16px; }
-
-body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
+body { overflow-x: hidden; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+img { max-width: 100%; height: auto; }
 
 /* ============================================================
    ANNOUNCEMENT BANNER
    ============================================================ */
 #banner-homepage.homepage-banner {
   position: relative !important;
-  z-index: 20 !important;
+  z-index: 100 !important;
   width: 100% !important;
   display: flex !important;
   align-items: center !important;
@@ -41,13 +28,11 @@ img {
   gap: 8px !important;
   background-color: #f5f0e8 !important;
 }
-
 .homepage-banner-content p {
   margin: 0 !important;
   font-size: 14px !important;
   line-height: 1.4 !important;
 }
-
 @media only screen and (max-width: 480px) {
   #banner-homepage.homepage-banner {
     flex-direction: column !important;
@@ -58,56 +43,99 @@ img {
 }
 
 /* ============================================================
-   NAVBAR / HEADER
+   STATIC HOME HERO WRAPPER
+   ============================================================ */
+.static_home {
+  position: relative !important;
+  width: 100% !important;
+  height: 530px !important;
+  overflow: visible !important;
+}
+@media only screen and (max-width: 768px) {
+  .static_home {
+    height: auto !important;
+    min-height: 320px !important;
+    padding-bottom: 70px !important;
+  }
+}
+
+/* ============================================================
+   BACKGROUND IMAGE — absolute so it never affects flow
+   ============================================================ */
+.static_home__background_image {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  z-index: 0 !important;
+  background: url(https://eu.viva-images.com/vivastreet_gb/home/Homepage_Static3.jpg) center center no-repeat !important;
+  background-size: cover !important;
+}
+@media only screen and (max-width: 768px) {
+  .static_home__background_image {
+    background: url(https://static.viva-images.com/templates/viwii3/images/home/header_uk_768.jpg) center center no-repeat !important;
+    background-size: cover !important;
+  }
+}
+
+/* ============================================================
+   NAVBAR — sits at top of static_home using relative flow
    ============================================================ */
 #static_home__header.static_home__header {
   position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
+  z-index: 10 !important;
   width: 100% !important;
-  background-color: transparent !important;
-  z-index: 15 !important;
-  display: block !important;
+  background-color: rgba(255,255,255,0.15) !important;
 }
 
+/* Desktop header content */
 .static_home__header__content {
+  display: none !important;
   position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
   margin: 0 auto !important;
-  width: 100% !important;
-  max-width: 1056px !important;
-  display: flex !important;
+  width: 1056px !important;
+  max-width: 100% !important;
+  padding: 0 20px !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 8px 20px !important;
+}
+@media only screen and (min-width: 769px) {
+  .static_home__header__content {
+    display: flex !important;
+  }
+}
+@media only screen and (max-width: 1070px) {
+  .static_home__header__content { width: 100% !important; }
 }
 
+/* Logo */
+.static_home__header__content #ico-logo-vs {
+  width: 220px;
+  height: 90px;
+  display: block;
+}
+
+/* Nav links row */
 .static_home__header__content .inline-desktop {
   position: relative !important;
   top: auto !important;
   display: block !important;
 }
-
 .static_home__header__content .inlinemenu ul {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
+  gap: 18px !important;
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  flex-wrap: wrap !important;
 }
+.static_home__header__content .inlinemenu li { margin: 0 !important; }
 
-.static_home__header__content .inlinemenu li {
-  display: inline-block !important;
-  margin: 0 !important;
-}
-
+/* Mobile header */
 .static_home__header__content_mobile {
-  display: none;
+  display: none !important;
   position: relative !important;
   width: 100% !important;
   height: auto !important;
@@ -116,9 +144,7 @@ img {
   align-items: center !important;
   justify-content: space-between !important;
 }
-
 @media only screen and (max-width: 768px) {
-  .static_home__header__content { display: none !important; }
   .static_home__header__content_mobile {
     display: flex !important;
   }
@@ -128,91 +154,62 @@ img {
     width: 28px !important;
     height: 28px !important;
   }
-  #ico-logo-vs {
-    width: 140px !important;
-    height: 56px !important;
-  }
-}
-
-/* ============================================================
-   HERO / STATIC HOME
-   ============================================================ */
-.static_home {
-  width: 100% !important;
-  position: relative !important;
-  margin-top: 0 !important;
-}
-
-@media only screen and (min-width: 769px) {
-  .static_home { height: 530px !important; }
-}
-
-@media only screen and (max-width: 768px) {
-  .static_home {
-    height: auto !important;
-    min-height: 280px !important;
-    padding-bottom: 16px !important;
-  }
-}
-
-.static_home__background_image {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  padding: 0;
-  z-index: 0;
-  text-align: center;
-  background: url(https://eu.viva-images.com/vivastreet_gb/home/Homepage_Static3.jpg) center center no-repeat;
-  background-size: cover;
-}
-
-@media only screen and (max-width: 768px) {
-  .static_home__background_image {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    background: url(https://static.viva-images.com/templates/viwii3/images/home/header_uk_768.jpg) center center no-repeat;
-    background-size: cover;
+  .static_home__header__content_mobile #ico-logo-vs {
+    width: 150px !important;
+    height: 60px !important;
   }
 }
 
 /* ============================================================
    HERO TITLE
    ============================================================ */
-.static_home__title { top: 58%; }
-
+.static_home__title {
+  position: absolute !important;
+  top: 55% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
+  text-align: center !important;
+  z-index: 5 !important;
+}
 @media only screen and (max-width: 768px) {
   .static_home__title {
-    top: auto !important;
     position: relative !important;
-    padding: 12px 16px 0 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 16px 16px 0 !important;
     text-align: center !important;
   }
   .static_home__title__content {
-    font-size: 20px !important;
+    font-size: 18px !important;
     line-height: 1.3 !important;
+    color: #fff !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
   }
 }
 
 /* ============================================================
-   HERO SEARCH FORM
+   SEARCH FORM
    ============================================================ */
-.static_home__category { top: 70%; }
-
+.static_home__category {
+  position: absolute !important;
+  top: 70% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 1056px !important;
+  max-width: 94vw !important;
+  z-index: 5 !important;
+}
 @media only screen and (max-width: 768px) {
   .static_home__category {
-    top: auto !important;
     position: relative !important;
-    width: 100% !important;
+    top: auto !important;
     left: auto !important;
     transform: none !important;
-    padding: 8px 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 12px !important;
   }
   .static_home__category__form {
     display: flex !important;
@@ -249,7 +246,7 @@ img {
   }
   .static_home__search_panel__category__form__title {
     color: #fff !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
     display: block !important;
     margin-bottom: 4px !important;
   }
@@ -259,35 +256,27 @@ img {
    MEGA MENU CATEGORY TABS
    ============================================================ */
 .static_home__mega_menu {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1056px;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 1056px !important;
+  z-index: 5 !important;
 }
-
 @media only screen and (max-width: 1070px) {
-  .static_home__mega_menu { width: 94vw; }
+  .static_home__mega_menu { width: 94vw !important; }
 }
-
 @media only screen and (max-width: 768px) {
   .static_home__mega_menu { display: none !important; }
 }
-
-.static_home__mega_menu__list {
-  display: flex;
-  flex-direction: row;
-}
-
+.static_home__mega_menu__list { display: flex; flex-direction: row; }
 .static_home__mega_menu__list__item {
   border: 0 !important;
-  border-right: 1px solid rgba(0, 0, 0, .32) !important;
+  border-right: 1px solid rgba(0,0,0,.32) !important;
 }
-
 .static_home__mega_menu__map {
-  border: 1px solid rgba(0, 0, 0, .32) !important;
+  border: 1px solid rgba(0,0,0,.32) !important;
 }
-
 .static_home__mega_menu__map__column {
   float: left;
   width: 25%;
@@ -295,33 +284,22 @@ img {
   line-height: 24px;
 }
 
-@media only screen and (max-width: 768px) {
-  .static_home__mega_menu__map__column {
-    width: 50%;
-    padding: 8px 8px 16px 12px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .static_home__mega_menu__map__column { width: 100%; }
-}
-
 /* ============================================================
    "POST YOUR AD" CTA BANNER
    ============================================================ */
 .main_post_home {
-  background-color: #2b2e36;
-  padding: 10px 20px !important;
+  background-color: #2b2e36 !important;
+  padding: 12px 20px !important;
 }
-
 .main_post_home_title {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   flex-wrap: wrap !important;
   gap: 12px !important;
+  max-width: 1056px !important;
+  margin: 0 auto !important;
 }
-
 @media only screen and (max-width: 768px) {
   .main_post_home { padding: 16px !important; }
   .main_post_home_title {
@@ -350,13 +328,10 @@ img {
   height: auto;
   padding: 0 16px;
 }
-
 @media only screen and (min-width: 1024px) {
   .pre_footer { padding: 0; width: 1000px; }
 }
-
 .links_block { padding: 0 16px 0 0; }
-
 @media only screen and (max-width: 768px) {
   .links_block { padding: 0 0 16px 0; }
   .links_block__title { font-size: 15px !important; }
@@ -368,10 +343,7 @@ img {
     margin: 8px 0 !important;
     list-style: none !important;
   }
-  .links_block__list__item {
-    display: inline !important;
-    font-size: 13px !important;
-  }
+  .links_block__list__item { display: inline !important; font-size: 13px !important; }
 }
 
 /* ============================================================
@@ -380,10 +352,7 @@ img {
 .social_links_block { padding: 16px 0; }
 .social_links_block__title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
 .social_links_block__list { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.social_links_block__list__item__link__image {
-  width: 50px; height: 50px; border-radius: 50%;
-}
-
+.social_links_block__list__item__link__image { width: 50px; height: 50px; border-radius: 50%; }
 @media only screen and (max-width: 480px) {
   .social_links_block__list__item__link__image { width: 40px; height: 40px; }
 }
@@ -392,20 +361,17 @@ img {
    FOOTER LINKS
    ============================================================ */
 .statics_links { background-color: #2b2e36; padding: 24px 20px; }
-
 .static_links_logo {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: flex-start !important;
   gap: 20px !important;
 }
-
 .footer-links { display: flex; flex-wrap: wrap; gap: 0 40px; }
 .footer-links ul { list-style: none; padding: 0; margin: 0 0 12px 0; min-width: 140px; }
 .footer-links ul li { margin-bottom: 6px; }
 .footer-links ul li a { color: #ccc; font-size: 13px; text-decoration: none; }
 .footer-links ul li a:hover { color: #fff; text-decoration: underline; }
-
 @media only screen and (max-width: 768px) {
   .statics_links { padding: 20px 16px; }
   .footer-links { flex-direction: column; gap: 0; }
@@ -419,7 +385,6 @@ img {
 .footer__content__copyright { color: #888; font-size: 12px; line-height: 1.6; }
 .footer__content__copyright a { color: #aaa; text-decoration: none; }
 .footer__content__copyright a:hover { color: #fff; }
-
 @media only screen and (max-width: 480px) {
   #footer.footer { padding: 14px 12px; }
   .footer__content__copyright { font-size: 11px; }
@@ -430,22 +395,17 @@ img {
    ============================================================ */
 .logo-footer { fill: #626364; }
 .logo-header { fill: #fff; }
-.static_home__header__content #ico-logo-vs {
-  width: 220px; height: 90px; top: 12px; margin-left: 15px;
-}
 
 /* ============================================================
    MOBILE SIDE MENU
    ============================================================ */
 .side_menu { display: none; }
-
 @media only screen and (max-width: 750px) {
   .side_menu { display: block; }
   .static_home__mega_menu_mobile__list_sub__item__heading {
     display: inline-block; padding: 15px; width: 100%; color: #000; font-weight: bold;
   }
 }
-
 .static_home__mobile__list__header {
   display: inline-block; padding: 15px; color: #000;
   background-color: #f3f3f3; border-bottom: 1px solid #fff;
@@ -460,45 +420,11 @@ img {
    VIDEO WRAPPER
    ============================================================ */
 .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; }
-
 @media only screen and (min-width: 300px) { .video-wrapper { display: none; } }
 @media only screen and (min-width: 780px) { .video-wrapper { display: block; } }
 
 /* ============================================================
-   MISC HELPERS
+   MISC
    ============================================================ */
-.eighteen {
-  font-size: 20px; line-height: 30px; font-weight: 300;
-  padding-left: 8px; padding-right: 0; width: 20px;
-}
-
+.eighteen { font-size: 20px; line-height: 30px; font-weight: 300; padding-left: 8px; padding-right: 0; width: 20px; }
 .displayNone { display: none !important; }
-
-
-
-/* ============================================================
-   STACKING: ensure all children of static_home sit above background
-   ============================================================ */
-#static_home__header.static_home__header,
-.static_home__title,
-.static_home__category,
-.static_home__mega_menu {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-/* Ensure static_home has minimum height so background is visible */
-@media only screen and (min-width: 769px) {
-  .static_home {
-    height: 530px !important;
-    min-height: 530px !important;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .static_home {
-    height: auto !important;
-    min-height: 300px !important;
-    padding-bottom: 20px !important;
-  }
-}
