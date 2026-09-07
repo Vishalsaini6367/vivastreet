@@ -478,6 +478,14 @@ img { max-width: 100%; height: auto; }
 
 .vs-mobile-sidebar {
   animation: vsSlideInLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y !important;
+}
+
+.vs-mobile-sidebar * {
+  flex-shrink: 0 !important;
 }
 
 .vs-mobile-sidebar-backdrop {

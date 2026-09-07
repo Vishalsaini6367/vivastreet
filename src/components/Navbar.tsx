@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface NavbarProps {
   setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
@@ -10,6 +10,17 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <header
@@ -170,11 +181,16 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
               top: 0,
               left: 0,
               bottom: 0,
+              height: "100dvh",
+              maxHeight: "100dvh",
               width: "68%",
               maxWidth: 290,
               backgroundColor: "#737c8d",
               zIndex: 99999,
               overflowY: "auto",
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "contain",
+              touchAction: "pan-y",
               boxShadow: "4px 0 16px rgba(0,0,0,0.3)",
               display: "flex",
               flexDirection: "column",
@@ -185,6 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
               href="#"
               onClick={(e) => { e.preventDefault(); setMenuOpen(false); }}
               style={{
+                flex: "0 0 auto",
                 backgroundColor: "#545c6b",
                 color: "#fff",
                 fontSize: 16,
@@ -192,6 +209,8 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                 padding: "18px 20px",
                 textDecoration: "none",
                 display: "block",
+                boxSizing: "border-box",
+                lineHeight: "20px",
               }}
             >
               My account
@@ -202,6 +221,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
               href="https://help.vivastreet.co.uk"
               onClick={() => setMenuOpen(false)}
               style={{
+                flex: "0 0 auto",
                 backgroundColor: "#697282",
                 color: "#fff",
                 fontSize: 15,
@@ -209,6 +229,8 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                 padding: "15px 20px",
                 textDecoration: "none",
                 display: "block",
+                boxSizing: "border-box",
+                lineHeight: "20px",
               }}
             >
               Help
@@ -219,6 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
               href="#"
               onClick={(e) => { e.preventDefault(); setPage("post-ad"); setMenuOpen(false); }}
               style={{
+                flex: "0 0 auto",
                 backgroundColor: "#fe7e22",
                 color: "#fff",
                 fontSize: 15,
@@ -228,6 +251,8 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                 display: "flex",
                 alignItems: "center",
                 gap: 12,
+                boxSizing: "border-box",
+                lineHeight: "20px",
               }}
             >
               <span
@@ -243,6 +268,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                   fontWeight: 700,
                   fontSize: 15,
                   lineHeight: 1,
+                  flexShrink: 0,
                 }}
               >
                 +
@@ -251,7 +277,15 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
             </a>
 
             {/* 4. Other links on slate-grey background */}
-            <div style={{ display: "flex", flexDirection: "column", backgroundColor: "#737c8d", paddingBottom: 24 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "#737c8d",
+                paddingBottom: 50,
+                flex: "0 0 auto",
+              }}
+            >
               {[
                 { label: "Contact us", href: "#" },
                 { label: "About us", href: "#" },
@@ -271,13 +305,16 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
                   style={{
+                    flex: "0 0 auto",
                     color: "#fff",
                     fontSize: 15,
                     fontWeight: 400,
                     padding: "13px 20px",
                     textDecoration: "none",
                     display: "block",
-                    lineHeight: 1.3,
+                    lineHeight: "20px",
+                    boxSizing: "border-box",
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
                   }}
                 >
                   {item.label}
