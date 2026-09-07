@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 
 interface NavbarProps {
   setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
@@ -16,41 +16,68 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
       <div className="static_home__header__content_mobile">
         <button
           type="button"
-          className="static_home__header__content__menu_trigger"
-          id="static_home__header__content__menu_trigger"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}
         >
-          <svg className="ico ico-menu static_home__header__content__menu_trigger__icon_menu">
-            <use xlinkHref="#ico-menu"></use>
+          <svg className="ico ico-menu" style={{ fill: "#fff", width: 28, height: 28 }}>
+            <use xlinkHref="#ico-menu" />
           </svg>
         </button>
-        <a className="vs-logo" href="#" onClick={(e) => { e.preventDefault(); setPage("home"); }} data-automation="mobHomepageIcon">
-          <svg id="ico-logo-vs" className="ico logo-header">
-            <use xlinkHref="#ico-logo-vs-white"></use>
+
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); setPage("home"); }}
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <svg id="ico-logo-vs" className="ico logo-header" style={{ width: 150, height: 62 }}>
+            <use xlinkHref="#ico-logo-vs-white" />
           </svg>
         </a>
-        <a href="#" onClick={(e) => e.preventDefault()} className="icon-search search-opener" id="search-opener" data-automation="mobSearch">
-          <svg className="ico ico-search search-opener__icon_search">
-            <use xlinkHref="#ico-search"></use>
-          </svg>
-        </a>
-        <nav className="inline-mobile">
-          <div className="inlinemenu">
-            <a href="#" onClick={(e) => { e.preventDefault(); setPage("post-ad"); }} data-automation="mobPostButton">
-              <div className="btn btn-orange">Post your Ad</div>
-            </a>
-          </div>
-        </nav>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex" }}>
+            <svg className="ico ico-search" style={{ fill: "#fff", width: 28, height: 28 }}>
+              <use xlinkHref="#ico-search" />
+            </svg>
+          </a>
+          <a href="#" onClick={(e) => { e.preventDefault(); setPage("post-ad"); }}>
+            <div className="btn btn-orange" style={{ padding: "8px 14px", fontSize: 13, whiteSpace: "nowrap" }}>
+              Post your Ad
+            </div>
+          </a>
+        </div>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div style={{
+          position: "absolute", top: "100%", left: 0, right: 0,
+          backgroundColor: "#2b2e36", zIndex: 999, padding: "16px 20px",
+          display: "flex", flexDirection: "column", gap: 14
+        }}>
+          <a href="https://www.vivastreet.co.uk/s/corporate_responsibility" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Corporate Responsibility</a>
+          <a href="https://www.vivastreet.co.uk/blog" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Blog</a>
+          <a href="#" onClick={(e) => e.preventDefault()} style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>My account</a>
+          <a href="https://help.vivastreet.co.uk" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Help</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); setPage("post-ad"); setMenuOpen(false); }}>
+            <div className="btn btn-orange" style={{ textAlign: "center", marginTop: 4 }}>Post your Ad</div>
+          </a>
+        </div>
+      )}
 
       {/* DESKTOP HEADER */}
       <div className="static_home__header__content">
-        <a className="vs-logo" href="#" onClick={(e) => { e.preventDefault(); setPage("home"); }} data-automation="homepageLogo">
+        <a
+          className="vs-logo"
+          href="#"
+          onClick={(e) => { e.preventDefault(); setPage("home"); }}
+          data-automation="homepageLogo"
+        >
           <svg id="ico-logo-vs" className="ico logo-header">
-            <use xlinkHref="#ico-logo-vs-white"></use>
+            <use xlinkHref="#ico-logo-vs-white" />
           </svg>
         </a>
+
         <nav className="inline-desktop">
           <div className="inlinemenu">
             <ul>
@@ -70,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
                 </a>
               </li>
               <li>
-                <a href="https://help.vivastreet.co.uk" data-automation="lnkHeaderHelp" className="nav--links" rel="nofollow">
+                <a href="https://help.vivastreet.co.uk" className="nav--links" data-automation="lnkHeaderHelp" rel="nofollow">
                   Help
                 </a>
               </li>
