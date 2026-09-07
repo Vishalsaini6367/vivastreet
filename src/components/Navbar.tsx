@@ -24,17 +24,37 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
       <div
         className="static_home__header__content_mobile"
         style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          padding: "10px 16px",
+          position: "relative",
+          left: 0,
+          top: 0,
+          transform: "none",
           backgroundColor: "transparent",
           background: "transparent",
+          boxSizing: "border-box",
         }}
       >
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "4px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "static",
+            margin: 0,
+          }}
           aria-label="Toggle menu"
         >
-          <svg className="ico ico-menu" style={{ fill: "#fff", width: 28, height: 28 }}>
+          <svg className="ico ico-menu" style={{ fill: "#fff", width: 28, height: 28, position: "static", top: 0, left: 0 }}>
             <use xlinkHref="#ico-menu" />
           </svg>
         </button>
@@ -42,9 +62,28 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); setPage("home"); }}
-          style={{ display: "flex", alignItems: "center" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "static",
+            margin: "0 auto",
+            textDecoration: "none",
+          }}
         >
-          <svg id="ico-logo-vs" className="ico logo-header" style={{ width: 140, height: 58 }}>
+          <svg
+            id="ico-logo-vs"
+            className="ico logo-header"
+            style={{
+              width: 140,
+              height: 52,
+              position: "static",
+              top: 0,
+              left: 0,
+              margin: 0,
+              display: "block",
+            }}
+          >
             <use xlinkHref="#ico-logo-vs-white" />
           </svg>
         </a>
@@ -52,10 +91,20 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
         <button
           type="button"
           onClick={() => onToggleSearch?.()}
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "4px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "static",
+            margin: 0,
+          }}
           aria-label="Search"
         >
-          <svg className="ico ico-search" style={{ fill: "#fff", width: 28, height: 28 }}>
+          <svg className="ico ico-search" style={{ fill: "#fff", width: 28, height: 28, position: "static", top: 0, left: 0 }}>
             <use xlinkHref="#ico-search" />
           </svg>
         </button>
