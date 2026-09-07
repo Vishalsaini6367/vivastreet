@@ -110,21 +110,182 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
         </button>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile Slide-Out Sidebar Drawer */}
       {menuOpen && (
-        <div style={{
-          position: "absolute", top: "100%", left: 0, right: 0,
-          backgroundColor: "#2b2e36", zIndex: 999, padding: "16px 20px",
-          display: "flex", flexDirection: "column", gap: 14
-        }}>
-          <a href="https://www.vivastreet.co.uk/s/corporate_responsibility" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Corporate Responsibility</a>
-          <a href="https://www.vivastreet.co.uk/blog" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Blog</a>
-          <a href="#" onClick={(e) => e.preventDefault()} style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>My account</a>
-          <a href="https://help.vivastreet.co.uk" style={{ color: "#fff", textDecoration: "none", fontSize: 15 }}>Help</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); setPage("post-ad"); setMenuOpen(false); }}>
-            <div className="btn btn-orange" style={{ textAlign: "center", marginTop: 4 }}>Post your Ad</div>
-          </a>
-        </div>
+        <>
+          {/* Backdrop overlay */}
+          <div
+            className="vs-mobile-sidebar-backdrop vs-mobile-only"
+            onClick={() => setMenuOpen(false)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.45)",
+              zIndex: 99998,
+            }}
+          />
+
+          {/* Close button X right outside the drawer */}
+          <button
+            type="button"
+            className="vs-mobile-sidebar-close vs-mobile-only"
+            onClick={() => setMenuOpen(false)}
+            style={{
+              position: "fixed",
+              top: 24,
+              left: "calc(68% + 12px)",
+              background: "none",
+              border: "none",
+              color: "#fff",
+              cursor: "pointer",
+              zIndex: 100000,
+              padding: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            aria-label="Close sidebar"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              style={{
+                width: 38,
+                height: 38,
+                stroke: "#fff",
+                strokeWidth: 3,
+                fill: "none",
+                strokeLinecap: "round",
+              }}
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+
+          {/* Drawer menu */}
+          <aside
+            className="vs-mobile-sidebar vs-mobile-only"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              width: "68%",
+              maxWidth: 290,
+              backgroundColor: "#737c8d",
+              zIndex: 99999,
+              overflowY: "auto",
+              boxShadow: "4px 0 16px rgba(0,0,0,0.3)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {/* 1. My account - dark slate */}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); setMenuOpen(false); }}
+              style={{
+                backgroundColor: "#545c6b",
+                color: "#fff",
+                fontSize: 16,
+                fontWeight: 500,
+                padding: "18px 20px",
+                textDecoration: "none",
+                display: "block",
+              }}
+            >
+              My account
+            </a>
+
+            {/* 2. Help */}
+            <a
+              href="https://help.vivastreet.co.uk"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                backgroundColor: "#697282",
+                color: "#fff",
+                fontSize: 15,
+                fontWeight: 400,
+                padding: "15px 20px",
+                textDecoration: "none",
+                display: "block",
+              }}
+            >
+              Help
+            </a>
+
+            {/* 3. Post your Ad - Vibrant Orange with white (+) icon */}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); setPage("post-ad"); setMenuOpen(false); }}
+              style={{
+                backgroundColor: "#fe7e22",
+                color: "#fff",
+                fontSize: 15,
+                fontWeight: 600,
+                padding: "14px 20px",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 20,
+                  height: 20,
+                  borderRadius: "50%",
+                  backgroundColor: "#fff",
+                  color: "#fe7e22",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  lineHeight: 1,
+                }}
+              >
+                +
+              </span>
+              Post your Ad
+            </a>
+
+            {/* 4. Other links on slate-grey background */}
+            <div style={{ display: "flex", flexDirection: "column", backgroundColor: "#737c8d", paddingBottom: 24 }}>
+              {[
+                { label: "Contact us", href: "#" },
+                { label: "About us", href: "#" },
+                { label: "Terms and Conditions", href: "#" },
+                { label: "Posting Guidelines", href: "#" },
+                { label: "Cookie policy", href: "#" },
+                { label: "Press", href: "#" },
+                { label: "Corporate Responsibility", href: "https://www.vivastreet.co.uk/s/corporate_responsibility" },
+                { label: "Support Services", href: "#" },
+                { label: "Modern Slavery Statement", href: "#" },
+                { label: "Online Safety Act", href: "#" },
+                { label: "Privacy policy", href: "#" },
+                { label: "Blog", href: "https://www.vivastreet.co.uk/blog" },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    color: "#fff",
+                    fontSize: 15,
+                    fontWeight: 400,
+                    padding: "13px 20px",
+                    textDecoration: "none",
+                    display: "block",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </aside>
+        </>
       )}
 
       {/* DESKTOP HEADER */}

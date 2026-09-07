@@ -459,9 +459,34 @@ img { max-width: 100%; height: auto; }
    RESPONSIVE SEPARATION (LAPTOP VS MOBILE)
    ============================================================ */
 @media only screen and (min-width: 769px) {
-  .vs-mobile-only {
+  .vs-mobile-only,
+  .vs-mobile-sidebar,
+  .vs-mobile-sidebar-backdrop,
+  .vs-mobile-sidebar-close {
     display: none !important;
   }
+}
+
+@keyframes vsSlideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.vs-mobile-sidebar {
+  animation: vsSlideInLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.vs-mobile-sidebar-backdrop {
+  animation: vsFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes vsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media only screen and (max-width: 768px) {
