@@ -73,7 +73,11 @@ img { max-width: 100%; height: auto; }
 }
 
 /* NAVBAR WRAPPER - relative, sits at top over bg */
-#static_home__header.static_home__header {
+#static_home__header,
+#static_home__header.static_home__header,
+.static_home__header,
+.static_home__header__content,
+.static_home__header__content_mobile {
   position: relative !important;
   z-index: 20 !important;
   width: 100% !important;

@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 
 interface NavbarProps {
   setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
@@ -11,9 +11,22 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header id="static_home__header" className="static_home__header">
+    <header
+      id="static_home__header"
+      className="static_home__header"
+      style={{
+        backgroundColor: "transparent",
+        background: "transparent",
+      }}
+    >
       {/* MOBILE HEADER */}
-      <div className="static_home__header__content_mobile">
+      <div
+        className="static_home__header__content_mobile"
+        style={{
+          backgroundColor: "transparent",
+          background: "transparent",
+        }}
+      >
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -66,7 +79,13 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
       )}
 
       {/* DESKTOP HEADER */}
-      <div className="static_home__header__content">
+      <div
+        className="static_home__header__content"
+        style={{
+          backgroundColor: "transparent",
+          background: "transparent",
+        }}
+      >
         <a
           className="vs-logo"
           href="#"
