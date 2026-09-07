@@ -77,7 +77,8 @@ img { max-width: 100%; height: auto; }
   position: relative !important;
   z-index: 20 !important;
   width: 100% !important;
-  background-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* DESKTOP HEADER CONTENT */
@@ -174,13 +175,16 @@ img { max-width: 100%; height: auto; }
 /* HERO TITLE */
 .static_home__title {
   position: absolute !important;
-  top: 55.5% !important;
+  top: auto !important;
+  bottom: calc(100% - 61.5% + 8px) !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
   text-align: center !important;
   z-index: 5 !important;
-  transform: translateY(-50%) !important;
+  transform: none !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -196,11 +200,13 @@ img { max-width: 100%; height: auto; }
   padding: 0 !important;
   text-align: center !important;
   width: 100% !important;
+  line-height: 1.1 !important;
 }
 @media only screen and (max-width: 768px) {
   .static_home__title {
     position: relative !important;
     top: auto !important;
+    bottom: auto !important;
     transform: none !important;
     padding: 16px 16px 4px !important;
     justify-content: center !important;
