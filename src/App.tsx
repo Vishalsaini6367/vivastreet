@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { SvgSymbols } from './components/SvgSymbols';
 import { AnnouncementBar } from './components/AnnouncementBar';
 import { Navbar } from './components/Navbar';
@@ -208,20 +208,16 @@ function App() {
           />
 
           {/* Post Your Ad CTA Banner */}
-          <section className="padding-l main_post_home">
-            <div className="grid grid--full main_post_home_title">
-              <div className="grid__item mob--one-whole tab--one-whole desk--two-thirds">
-                <h2 style={{ color: '#fff', padding: '20px 0', fontSize: '28px', lineHeight: '28px', fontWeight: 400 }}>
-                  Post your ad now !
-                </h2>
-              </div>
-              <div className="grid__item mob--one-whole tab--one-whole desk--one-quarter">
-                <a href="#" onClick={(e) => { e.preventDefault(); setPage('post-ad'); }}>
-                  <div className="btn btn-orange btn-primary" data-automation="homepagePostAdButton">
-                    Post your Ad
-                  </div>
-                </a>
-              </div>
+          <section style={{ backgroundColor: '#2b2e36', padding: '0 20px', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, maxWidth: 1056, margin: '0 auto', padding: '20px 0' }}>
+              <h2 style={{ color: '#fff', fontSize: 28, lineHeight: '28px', fontWeight: 400, margin: 0, padding: 0 }}>
+                Post your ad now !
+              </h2>
+              <a href="#" onClick={(e) => { e.preventDefault(); setPage('post-ad'); }}>
+                <div className="btn btn-orange btn-primary" data-automation="homepagePostAdButton" style={{ fontSize: 16, padding: '14px 32px', fontWeight: 600 }}>
+                  Post your Ad
+                </div>
+              </a>
             </div>
           </section>
 
