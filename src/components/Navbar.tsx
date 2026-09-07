@@ -5,9 +5,10 @@ interface NavbarProps {
   darkMode?: boolean;
   toggleDarkMode?: () => void;
   onSearch?: (query: string) => void;
+  onToggleSearch?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
+export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -31,6 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex" }}
+          aria-label="Toggle menu"
         >
           <svg className="ico ico-menu" style={{ fill: "#fff", width: 28, height: 28 }}>
             <use xlinkHref="#ico-menu" />
@@ -42,23 +44,21 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage }) => {
           onClick={(e) => { e.preventDefault(); setPage("home"); }}
           style={{ display: "flex", alignItems: "center" }}
         >
-          <svg id="ico-logo-vs" className="ico logo-header" style={{ width: 150, height: 62 }}>
+          <svg id="ico-logo-vs" className="ico logo-header" style={{ width: 140, height: 58 }}>
             <use xlinkHref="#ico-logo-vs-white" />
           </svg>
         </a>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex" }}>
-            <svg className="ico ico-search" style={{ fill: "#fff", width: 28, height: 28 }}>
-              <use xlinkHref="#ico-search" />
-            </svg>
-          </a>
-          <a href="#" onClick={(e) => { e.preventDefault(); setPage("post-ad"); }}>
-            <div className="btn btn-orange" style={{ padding: "8px 14px", fontSize: 13, whiteSpace: "nowrap" }}>
-              Post your Ad
-            </div>
-          </a>
-        </div>
+        <button
+          type="button"
+          onClick={() => onToggleSearch?.()}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}
+          aria-label="Search"
+        >
+          <svg className="ico ico-search" style={{ fill: "#fff", width: 28, height: 28 }}>
+            <use xlinkHref="#ico-search" />
+          </svg>
+        </button>
       </div>
 
       {/* Mobile dropdown menu */}

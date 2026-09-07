@@ -1,6 +1,7 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { Navbar } from "./Navbar";
 import { CategoryGrid } from "./CategoryGrid";
+import { MobileCategoryList } from "./MobileCategoryList";
 
 interface HeroProps {
   onSearchSubmit: (query: string, category: string, location: string) => void;
@@ -11,6 +12,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onSearchSubmit, onSelectCategory, setPage }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("0");
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,20 +20,32 @@ export const Hero: React.FC<HeroProps> = ({ onSearchSubmit, onSelectCategory, se
   };
 
   return (
-    <div id="static_home" className="static_home">
-      {/* Background image - absolutely fills the hero */}
-      <div className="static_home__background_image" />
+    <>
+      <div id="static_home" className="static_home">
+        {/* Background image - absolutely fills the hero */}
+        <div className="static_home__background_image" />
 
-      {/* Navbar overlays at top of hero */}
-      <Navbar setPage={setPage} />
+        {/* Navbar overlays at top of hero */}
+        <Navbar setPage={setPage} onToggleSearch={() => setMobileSearchOpen(!mobileSearchOpen)} />
 
-      {/* Title - absolute centered in hero */}
-      <div className="static_home__title">
-        <h1 className="static_home__title__content">FREE LOCAL CLASSIFIED ADS</h1>
-      </div>
+        {/* Mobile-only centered Post your Ad button matching official mobile screenshot */}
+        <div className="vs-mobile-hero-post vs-mobile-only">
+          <button
+            type="button"
+            className="vs-mobile-post-ad-btn"
+            onClick={() => setPage("post-ad")}
+          >
+            Post your Ad
+          </button>
+        </div>
 
-      {/* Search form */}
-      <div className="static_home__category grid__item">
+        {/* Title - Desktop only */}
+        <div className="static_home__title vs-desktop-only">
+          <h1 className="static_home__title__content">FREE LOCAL CLASSIFIED ADS</h1>
+        </div>
+
+        {/* Search form - Desktop or opened on Mobile */}
+        <div className={`static_home__category grid__item ${mobileSearchOpen ? "vs-mobile-search-open" : "vs-desktop-only"}`}>
         <form
           className="static_home__category__form grid grid--full"
           id="static_home__category__form"
@@ -194,8 +208,16 @@ export const Hero: React.FC<HeroProps> = ({ onSearchSubmit, onSelectCategory, se
         </form>
       </div>
 
-      {/* Category Tabs bar at bottom of hero */}
-      <CategoryGrid onSelectCategory={onSelectCategory} />
+      {/* Category Tabs bar at bottom of hero - Desktop only */}
+      <div className="vs-desktop-only">
+        <CategoryGrid onSelectCategory={onSelectCategory} />
+      </div>
     </div>
+
+    {/* Mobile Category Accordion List directly below hero */}
+    <div className="vs-mobile-only">
+      <MobileCategoryList onSelectCategory={onSelectCategory} />
+    </div>
+  </>
   );
 };
