@@ -6,6 +6,7 @@ import { Hero } from './components/Hero';
 import { ListingGrid } from './components/ListingGrid';
 import { ListingDetail } from './components/ListingDetail';
 import { PostAdWizard } from './components/PostAdWizard';
+import { LoginPage } from './components/LoginPage';
 import { Footer } from './components/Footer';
 import { Listing } from './components/ListingCard';
 
@@ -124,7 +125,7 @@ const SUBCATEGORIES_BY_CATEGORY: Record<string, string[]> = {
 };
 
 function App() {
-  const [page, setPage] = useState<'home' | 'search' | 'detail' | 'post-ad'>('home');
+  const [page, setPage] = useState<'home' | 'search' | 'detail' | 'post-ad' | 'login'>('home');
   const [listings, setListings] = useState<Listing[]>(INITIAL_MOCK_LISTINGS);
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
   const [darkMode] = useState<boolean>(false);
@@ -146,7 +147,7 @@ function App() {
 
   // History-aware Navigation
   const navigateTo = (
-    newPage: 'home' | 'search' | 'detail' | 'post-ad',
+    newPage: 'home' | 'search' | 'detail' | 'post-ad' | 'login',
     listingItem?: Listing | null,
     pushHistory = true
   ) => {
@@ -233,10 +234,10 @@ function App() {
       <SvgSymbols />
 
       {/* Top Banner */}
-      <AnnouncementBar />
+      {page !== 'login' && <AnnouncementBar />}
 
       {/* Non-Home Page Header with Back Button Bar */}
-      {page !== 'home' && (
+      {page !== 'home' && page !== 'login' && (
         <div style={{ backgroundColor: '#2b2e36' }}>
           <div style={{ padding: '5px 0' }}>
             <Navbar setPage={(p) => navigateTo(p)} />
@@ -442,6 +443,13 @@ function App() {
           onPublish={handlePublishAd}
           onCancel={handleGoBack}
           onViewAd={handleViewCreatedAd}
+        />
+      )}
+
+      {page === 'login' && (
+        <LoginPage
+          setPage={(p) => navigateTo(p)}
+          onBack={handleGoBack}
         />
       )}
 

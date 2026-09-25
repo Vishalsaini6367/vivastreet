@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 interface NavbarProps {
-  setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
+  setPage: (page: "home" | "search" | "detail" | "post-ad" | "login") => void;
   darkMode?: boolean;
   toggleDarkMode?: () => void;
   onSearch?: (query: string) => void;
@@ -201,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
             {/* 1. My account - dark slate */}
             <a
               href="#"
-              onClick={(e) => { e.preventDefault(); setMenuOpen(false); }}
+              onClick={(e) => { e.preventDefault(); setMenuOpen(false); setPage("login"); }}
               style={{
                 flex: "0 0 auto",
                 backgroundColor: "#545c6b",
@@ -361,7 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, onToggleSearch }) => {
                 </a>
               </li>
               <li>
-                <a href="#" onClick={(e) => e.preventDefault()} className="nav--links" data-automation="lnkHeaderLogin">
+                <a href="#" onClick={(e) => { e.preventDefault(); setPage("login"); }} className="nav--links" data-automation="lnkHeaderLogin">
                   My account
                 </a>
               </li>

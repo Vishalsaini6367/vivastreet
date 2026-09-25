@@ -6,7 +6,7 @@ import { MobileCategoryList } from "./MobileCategoryList";
 interface HeroProps {
   onSearchSubmit: (query: string, category: string, location: string) => void;
   onSelectCategory: (category: string) => void;
-  setPage: (page: "home" | "search" | "detail" | "post-ad") => void;
+  setPage: (page: "home" | "search" | "detail" | "post-ad" | "login") => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onSearchSubmit, onSelectCategory, setPage }) => {
