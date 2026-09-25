@@ -447,14 +447,11 @@ function App() {
       )}
 
       {page === 'login' && (
-        <LoginPage
-          setPage={(p) => navigateTo(p)}
-          onBack={handleGoBack}
-        />
+        <LoginPage setPage={(p) => navigateTo(p)} />
       )}
 
-      {/* Footer */}
-      <Footer />
+      {/* Footer (all pages except login) */}
+      {page !== 'login' && <Footer />}
     </div>
   );
 }

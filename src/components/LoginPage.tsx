@@ -3,14 +3,15 @@ import { createPortal } from "react-dom";
 
 interface LoginPageProps {
   setPage: (page: "home" | "search" | "detail" | "post-ad" | "login") => void;
-  onBack?: () => void;
 }
 
-export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({ setPage }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const [loggedInToast, setLoggedInToast] = useState(false);
 
   useEffect(() => {
@@ -35,8 +36,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
   };
 
   return (
-    <div style={{ backgroundColor: "#ffffff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* 1. OFFICIAL WHITE LOGIN HEADER */}
+    <div style={{ backgroundColor: "#ffffff", minHeight: "100vh", display: "flex", flexDirection: "column", color: "#1e293b", fontFamily: "Arial, sans-serif" }}>
+      {/* 1. TOP WHITE HEADER */}
       <header
         style={{
           backgroundColor: "#ffffff",
@@ -51,7 +52,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
           style={{
             maxWidth: 1056,
             margin: "0 auto",
-            padding: "8px 16px",
+            padding: "10px 16px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -70,8 +71,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
           >
             <svg
               style={{
-                width: 140,
-                height: 48,
+                width: 135,
+                height: 44,
                 display: "block",
               }}
             >
@@ -79,8 +80,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
             </svg>
           </a>
 
-          {/* 3 Right Action Buttons: FAVOURITES, POST AN AD, MENU */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          {/* Right Action Icons: FAVOURITES, POST AN AD, MENU */}
+          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             {/* Favourites */}
             <button
               type="button"
@@ -88,12 +89,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               style={{
                 background: "none",
                 border: "none",
-                padding: "4px 2px",
+                padding: "2px 0",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
+                gap: 3,
               }}
               aria-label="Favourites"
             >
@@ -103,7 +104,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 height="22"
                 fill="none"
                 stroke="#2b2e36"
-                strokeWidth="1.8"
+                strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -111,10 +112,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               </svg>
               <span
                 style={{
-                  fontSize: 9.5,
+                  fontSize: 9,
                   fontWeight: 700,
-                  color: "#475569",
-                  letterSpacing: 0.5,
+                  color: "#374151",
+                  letterSpacing: 0.3,
                   textTransform: "uppercase",
                 }}
               >
@@ -129,12 +130,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               style={{
                 background: "none",
                 border: "none",
-                padding: "4px 2px",
+                padding: "2px 0",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
+                gap: 3,
               }}
               aria-label="Post an Ad"
             >
@@ -144,7 +145,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 height="22"
                 fill="none"
                 stroke="#2b2e36"
-                strokeWidth="1.8"
+                strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -154,10 +155,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               </svg>
               <span
                 style={{
-                  fontSize: 9.5,
+                  fontSize: 9,
                   fontWeight: 700,
-                  color: "#475569",
-                  letterSpacing: 0.5,
+                  color: "#374151",
+                  letterSpacing: 0.3,
                   textTransform: "uppercase",
                 }}
               >
@@ -172,12 +173,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               style={{
                 background: "none",
                 border: "none",
-                padding: "4px 2px",
+                padding: "2px 0",
                 cursor: "pointer",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
+                gap: 3,
               }}
               aria-label="Menu"
             >
@@ -187,7 +188,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 height="22"
                 fill="none"
                 stroke="#2b2e36"
-                strokeWidth="2.2"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -197,10 +198,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               </svg>
               <span
                 style={{
-                  fontSize: 9.5,
+                  fontSize: 9,
                   fontWeight: 700,
-                  color: "#475569",
-                  letterSpacing: 0.5,
+                  color: "#374151",
+                  letterSpacing: 0.3,
                   textTransform: "uppercase",
                 }}
               >
@@ -211,59 +212,36 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
         </div>
       </header>
 
-      {/* 2. MAIN LOGIN FORM CONTAINER */}
+      {/* 2. MAIN LOGIN CONTENT */}
       <main
         style={{
           flex: "1 0 auto",
           width: "100%",
-          padding: "24px 20px 40px",
+          padding: "36px 16px 40px",
           boxSizing: "border-box",
         }}
       >
         <div
           style={{
-            maxWidth: 460,
+            maxWidth: 440,
             margin: "0 auto",
             boxSizing: "border-box",
           }}
         >
-          {/* Back button if available */}
-          {onBack && (
-            <button
-              type="button"
-              onClick={onBack}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#64748b",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                cursor: "pointer",
-                fontSize: 14,
-                fontWeight: 500,
-                padding: 0,
-                marginBottom: 16,
-              }}
-            >
-              <span>← Back</span>
-            </button>
-          )}
-
-          {/* Heading */}
+          {/* Title */}
           <h1
             style={{
-              fontSize: 26,
+              fontSize: 27,
               fontWeight: 700,
               color: "#1e293b",
               margin: "0 0 24px 0",
-              letterSpacing: "-0.3px",
+              letterSpacing: "-0.4px",
             }}
           >
             Login to Vivastreet
           </h1>
 
-          {/* Login Notification Toast */}
+          {/* Toast Notification */}
           {loggedInToast && (
             <div
               style={{
@@ -275,19 +253,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 marginBottom: 20,
                 fontSize: 14,
                 fontWeight: 600,
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
               }}
             >
-              <span>✓ Logged in successfully! Redirecting...</span>
+              ✓ Logged in successfully! Redirecting...
             </div>
           )}
 
-          {/* Login Form */}
+          {/* Form */}
           <form onSubmit={handleSubmit}>
             {/* Email Address */}
-            <div style={{ marginBottom: 18 }}>
+            <div style={{ marginBottom: 20 }}>
               <label
                 htmlFor="login-email"
                 style={{
@@ -300,38 +275,48 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               >
                 Email address
               </label>
-              <input
-                id="login-email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <div
                 style={{
                   width: "100%",
                   height: 48,
-                  padding: "10px 14px",
-                  border: "1.5px solid #d1d5db",
+                  border: emailFocused ? "1.5px solid #65b21c" : "1px solid #d1d5db",
                   borderRadius: 8,
-                  fontSize: 16,
-                  outline: "none",
                   boxSizing: "border-box",
-                  color: "#1e293b",
                   backgroundColor: "#ffffff",
+                  boxShadow: emailFocused ? "0 0 0 3px rgba(101, 178, 28, 0.15)" : "none",
                   transition: "border-color 0.2s, box-shadow 0.2s",
+                  display: "flex",
+                  alignItems: "center",
                 }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#65b21c";
-                  e.target.style.boxShadow = "0 0 0 3px rgba(101, 178, 28, 0.15)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "#d1d5db";
-                  e.target.style.boxShadow = "none";
-                }}
-              />
+              >
+                <input
+                  id="login-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    outline: "none",
+                    backgroundColor: "transparent",
+                    padding: "0 14px",
+                    fontSize: 16,
+                    color: "#1e293b",
+                    boxSizing: "border-box",
+                    float: "none",
+                    clear: "none",
+                    boxShadow: "none",
+                  }}
+                />
+              </div>
             </div>
 
             {/* Password */}
-            <div style={{ marginBottom: 14 }}>
+            <div style={{ marginBottom: 10 }}>
               <label
                 htmlFor="login-password"
                 style={{
@@ -344,83 +329,72 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               >
                 Password
               </label>
-              <div style={{ position: "relative", width: "100%" }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: 48,
+                  border: passwordFocused ? "1.5px solid #65b21c" : "1px solid #d1d5db",
+                  borderRadius: 8,
+                  boxSizing: "border-box",
+                  backgroundColor: "#ffffff",
+                  boxShadow: passwordFocused ? "0 0 0 3px rgba(101, 178, 28, 0.15)" : "none",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   id="login-password"
                   type={showPassword ? "text" : "password"}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
                   style={{
-                    width: "100%",
-                    height: 48,
-                    padding: "10px 46px 10px 14px",
-                    border: "1.5px solid #d1d5db",
-                    borderRadius: 8,
-                    fontSize: 16,
+                    flex: 1,
+                    height: "100%",
+                    border: "none",
                     outline: "none",
-                    boxSizing: "border-box",
+                    backgroundColor: "transparent",
+                    padding: "0 14px",
+                    fontSize: 16,
                     color: "#1e293b",
-                    backgroundColor: "#ffffff",
-                    transition: "border-color 0.2s, box-shadow 0.2s",
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "#65b21c";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(101, 178, 28, 0.15)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "#d1d5db";
-                    e.target.style.boxShadow = "none";
+                    boxSizing: "border-box",
+                    float: "none",
+                    clear: "none",
+                    boxShadow: "none",
                   }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   style={{
-                    position: "absolute",
-                    right: 12,
-                    top: "50%",
-                    transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
+                    padding: "0 14px",
+                    height: "100%",
                     cursor: "pointer",
-                    padding: 4,
-                    color: "#6b7280",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    color: "#6b7280",
                   }}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? (
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="22"
-                      height="22"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                      <line x1="1" y1="1" x2="23" y2="23" />
-                    </svg>
-                  ) : (
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="22"
-                      height="22"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                  )}
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="22"
+                    height="22"
+                    fill="none"
+                    stroke="#6b7280"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -436,13 +410,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                   fontSize: 15,
                   textDecoration: "underline",
                   fontWeight: 400,
+                  display: "inline-block",
                 }}
               >
                 Forgotten your password?
               </a>
             </div>
 
-            {/* Green Login Button */}
+            {/* Flat Lime Green Login Button */}
             <button
               type="submit"
               style={{
@@ -455,11 +430,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 border: "none",
                 borderRadius: 8,
                 cursor: "pointer",
-                transition: "background-color 0.2s",
+                transition: "background-color 0.15s ease",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 2px 4px rgba(101, 178, 28, 0.2)",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5ca119")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#65b21c")}
@@ -468,14 +442,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
             </button>
 
             {/* Create an account */}
-            <div style={{ textAlign: "center", marginTop: 20 }}>
+            <div style={{ textAlign: "center", marginTop: 22 }}>
               <a
                 href="https://www.vivastreet.co.uk/register"
                 target="_blank"
                 rel="noreferrer"
                 style={{
                   color: "#0284c7",
-                  fontSize: 16,
+                  fontSize: 15.5,
                   fontWeight: 500,
                   textDecoration: "underline",
                   display: "inline-block",
@@ -491,7 +465,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 marginTop: 28,
                 marginBottom: 28,
                 fontSize: 15,
-                color: "#334155",
+                color: "#374151",
                 lineHeight: 1.5,
               }}
             >
@@ -510,12 +484,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
             </div>
           </form>
 
-          {/* Divider */}
-          <div style={{ borderTop: "1px solid #e5e7eb", margin: "24px 0" }} />
+          {/* Thin Divider */}
+          <div style={{ borderTop: "1px solid #e5e7eb", margin: "24px 0 28px 0" }} />
 
-          {/* Vivastreet Sub-links matching screenshot preview */}
-          <div style={{ paddingBottom: 24 }}>
-            <h3
+          {/* Sub-footer Section matching screenshot */}
+          <div style={{ paddingBottom: 40 }}>
+            <h2
               style={{
                 fontSize: 18,
                 fontWeight: 700,
@@ -524,55 +498,32 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               }}
             >
               Vivastreet
-            </h3>
-            <ul
-              style={{
-                listStyle: "none",
-                padding: 0,
-                margin: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: 12,
-              }}
-            >
-              <li>
-                <a
-                  href="https://www.vivastreet.co.uk/s/about-us"
-                  style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.vivastreet.co.uk/s/press"
-                  style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
-                >
-                  Press
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.vivastreet.co.uk/blog/"
-                  style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
-                >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.vivastreet.co.uk/s/corporate_responsibility"
-                  style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
-                >
-                  Corporate Responsibility
-                </a>
-              </li>
-            </ul>
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <a
+                href="https://www.vivastreet.co.uk/s/about-us"
+                style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
+              >
+                About Us
+              </a>
+              <a
+                href="https://www.vivastreet.co.uk/s/press"
+                style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
+              >
+                Press
+              </a>
+              <a
+                href="https://www.vivastreet.co.uk/blog/"
+                style={{ color: "#475569", textDecoration: "none", fontSize: 15 }}
+              >
+                Blog
+              </a>
+            </div>
           </div>
         </div>
       </main>
 
-      {/* 3. SLIDE-OUT MENU DRAWER PORTAL (When MENU is clicked) */}
+      {/* 3. SLIDE-OUT MENU DRAWER PORTAL (When MENU is tapped) */}
       {menuOpen &&
         createPortal(
           <>
@@ -588,7 +539,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
               }}
             />
 
-            {/* Close button X right outside the drawer */}
+            {/* Close button X */}
             <button
               type="button"
               className="vs-mobile-sidebar-close"
@@ -648,7 +599,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 flexDirection: "column",
               }}
             >
-              {/* 1. My account - dark slate */}
+              {/* 1. My account */}
               <a
                 href="#"
                 onClick={(e) => {
@@ -694,7 +645,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 Help
               </a>
 
-              {/* 3. Post your Ad - Vibrant Orange with white (+) icon */}
+              {/* 3. Post your Ad */}
               <a
                 href="#"
                 onClick={(e) => {
@@ -738,7 +689,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setPage, onBack }) => {
                 Post your Ad
               </a>
 
-              {/* 4. Other links on slate-grey background */}
+              {/* 4. Other links */}
               <div
                 style={{
                   display: "flex",
